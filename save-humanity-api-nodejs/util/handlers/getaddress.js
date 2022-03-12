@@ -1,4 +1,10 @@
 const puppeteer = require('puppeteer');
+const { admin, db } = require("../admin");
+
+exports.getAddress = async(req, res) => {    
+    return getAddress();
+}
+
 async function getAddress(){
     const browser = await puppeteer.launch({ headless: true }); // for test disable the headlels mode,
     const page = await browser.newPage();
@@ -8,9 +14,9 @@ async function getAddress(){
     /** @type {string[]} */
     var addressInfo = await page.evaluate(()=>{
         var address = document.getElementsByClassName('Yr7JMd-pane-hSRGPd')[2].innerHTML;
-        return address
-    })
+        return address;
+    });
 
-    console.log(addressInfo)
-    browser.close()
+    // console.log(addressInfo);
+    browser.close();
 } 
